@@ -12,10 +12,10 @@ http:
   url: "{{baseUrl}}/billing/organization/:orgaId"
   headers:
     - name: Secret
-      value: test
+      value: "{{admin-secret}}"
   params:
     - name: orgaId
-      value: ""
+      value: 5dcc41b5-48a5-4d54-9d1f-639bb0574932
       type: path
       description: Organization ID
   auth: inherit
