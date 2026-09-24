@@ -1,0 +1,124 @@
+info:
+  name: Get BaaS instance
+  type: http
+  seq: 26
+  tags:
+    - v1
+    - SPX Argo Ctrl
+
+http:
+  method: GET
+  url: "{{baseUrl}}/:orgaId/api/spx-ctrl/:az/:projectId/baas/:effectiveId"
+  headers:
+    - name: Authorization
+      value: "{{apiKey}}"
+      description: Access token used to check user access in Superphenix API.
+  params:
+    - name: orgaId
+      value: ""
+      type: path
+      description: Organization ID
+    - name: az
+      value: ""
+      type: path
+      description: AZ Code
+    - name: projectId
+      value: ""
+      type: path
+      description: Project ID
+    - name: effectiveId
+      value: ""
+      type: path
+      description: BaaS EID
+  auth:
+    type: apikey
+    key: Authorization
+    value: "{{apiKey}}"
+    placement: header
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: 200 Response
+    description: BaaS
+    request:
+      url: "{{baseUrl}}/:orgaId/api/spx-ctrl/:az/:projectId/baas/:effectiveId"
+      method: GET
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+      params:
+        - name: orgaId
+          value: ""
+          type: path
+          description: Organization ID
+        - name: az
+          value: ""
+          type: path
+          description: AZ Code
+        - name: projectId
+          value: ""
+          type: path
+          description: Project ID
+        - name: effectiveId
+          value: ""
+          type: path
+          description: BaaS EID
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "backup": "",
+            "codeAZ": "",
+            "eid": "",
+            "gitops": "",
+            "id": "",
+            "productName": "",
+            "productTypeId": ""
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{baseUrl}}/:orgaId/api/spx-ctrl/:az/:projectId/baas/:effectiveId"
+      method: GET
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+      params:
+        - name: orgaId
+          value: ""
+          type: path
+          description: Organization ID
+        - name: az
+          value: ""
+          type: path
+          description: AZ Code
+        - name: projectId
+          value: ""
+          type: path
+          description: Project ID
+        - name: effectiveId
+          value: ""
+          type: path
+          description: BaaS EID
+    response:
+      status: 500
+      statusText: Internal Server Error
+      body:
+        type: text
+        data: ""
+
+docs: Get BaaS instance by effective ID

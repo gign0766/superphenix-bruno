@@ -1,0 +1,82 @@
+info:
+  name: Regenerate Invite Code
+  type: http
+  seq: 1
+  tags:
+    - v1
+    - user
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v1/invite-code"
+  headers:
+    - name: Authorization
+      value: "{{apiKey}}"
+      description: Access token used to check user access in Superphenix API.
+  auth:
+    type: apikey
+    key: Authorization
+    value: "{{apiKey}}"
+    placement: header
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: 200 Response
+    description: New Invite Code
+    request:
+      url: "{{baseUrl}}/v1/invite-code"
+      method: POST
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "inviteCode": ""
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v1/invite-code"
+      method: POST
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+    response:
+      status: 401
+      statusText: Unauthorized
+      body:
+        type: text
+        data: ""
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{baseUrl}}/v1/invite-code"
+      method: POST
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+    response:
+      status: 500
+      statusText: Internal Server Error
+      body:
+        type: text
+        data: ""
+
+docs: Regenerate the invite code of the authenticated user

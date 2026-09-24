@@ -1,0 +1,114 @@
+info:
+  name: Retrieve all AZ VPCs
+  type: http
+  seq: 107
+  tags:
+    - v1
+    - Superphenix Controller
+
+http:
+  method: GET
+  url: "{{baseUrl}}/:orgaId/api/spx-ctrl/:az/:projectId/vpc"
+  headers:
+    - name: Authorization
+      value: "{{apiKey}}"
+      description: Access token used to check user access in Superphenix API.
+  params:
+    - name: orgaId
+      value: ""
+      type: path
+      description: Organization ID
+    - name: az
+      value: ""
+      type: path
+      description: AZ Code
+    - name: projectId
+      value: ""
+      type: path
+      description: Project ID
+  auth:
+    type: apikey
+    key: Authorization
+    value: "{{apiKey}}"
+    placement: header
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: 200 Response
+    description: VPCs
+    request:
+      url: "{{baseUrl}}/:orgaId/api/spx-ctrl/:az/:projectId/vpc"
+      method: GET
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+      params:
+        - name: orgaId
+          value: ""
+          type: path
+          description: Organization ID
+        - name: az
+          value: ""
+          type: path
+          description: AZ Code
+        - name: projectId
+          value: ""
+          type: path
+          description: Project ID
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          [
+            {
+              "codeAZ": "",
+              "eid": "",
+              "gitops": "",
+              "id": "",
+              "productName": "",
+              "productTypeId": "",
+              "vpc": ""
+            }
+          ]
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{baseUrl}}/:orgaId/api/spx-ctrl/:az/:projectId/vpc"
+      method: GET
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+      params:
+        - name: orgaId
+          value: ""
+          type: path
+          description: Organization ID
+        - name: az
+          value: ""
+          type: path
+          description: AZ Code
+        - name: projectId
+          value: ""
+          type: path
+          description: Project ID
+    response:
+      status: 500
+      statusText: Internal Server Error
+      body:
+        type: text
+        data: ""
+
+docs: Retrieve all VPCs for a specific AZ

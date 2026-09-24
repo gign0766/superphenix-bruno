@@ -1,0 +1,111 @@
+info:
+  name: List API Tokens
+  type: http
+  seq: 1
+  tags:
+    - api-token
+
+http:
+  method: GET
+  url: "{{baseUrl}}/api-token"
+  headers:
+    - name: Authorization
+      value: "{{apiKey}}"
+      description: Access token used to check user access in Superphenix API.
+  auth:
+    type: apikey
+    key: Authorization
+    value: "{{apiKey}}"
+    placement: header
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: 200 Response
+    description: List of API tokens
+    request:
+      url: "{{baseUrl}}/api-token"
+      method: GET
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          [
+            {
+              "createdAt": "",
+              "expiresAt": "",
+              "id": "",
+              "name": "",
+              "prefix": ""
+            }
+          ]
+  - name: 400 Response
+    description: Invalid userId format
+    request:
+      url: "{{baseUrl}}/api-token"
+      method: GET
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: ""
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/api-token"
+      method: GET
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: ""
+  - name: 500 Response
+    description: Internal server error
+    request:
+      url: "{{baseUrl}}/api-token"
+      method: GET
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: ""
+
+docs: Retrieve all API tokens belonging to the authenticated user. Token secrets are not included.

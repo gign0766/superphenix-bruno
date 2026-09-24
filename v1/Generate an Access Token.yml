@@ -1,0 +1,64 @@
+info:
+  name: Generate an Access Token
+  type: http
+  seq: 21
+  tags:
+    - v1
+    - session
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v1/session"
+  headers:
+    - name: session
+      value: "{{apiKey}}"
+      description: Refresh token with longer validity. Used to generate a new access token within the validity of the token.
+  auth:
+    type: apikey
+    key: session
+    value: "{{apiKey}}"
+    placement: header
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: 200 Response
+    description: JWT
+    request:
+      url: "{{baseUrl}}/v1/session"
+      method: GET
+      headers:
+        - name: session
+          value: "{{apiKey}}"
+          description: Refresh token with longer validity. Used to generate a new access token within the validity of the token.
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/plain
+      body:
+        type: text
+        data: ""
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{baseUrl}}/v1/session"
+      method: GET
+      headers:
+        - name: session
+          value: "{{apiKey}}"
+          description: Refresh token with longer validity. Used to generate a new access token within the validity of the token.
+    response:
+      status: 500
+      statusText: Internal Server Error
+      body:
+        type: text
+        data: ""
+
+docs: Generates an access token based on refresh token

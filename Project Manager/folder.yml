@@ -1,0 +1,6 @@
+info:
+  name: Project Manager
+  type: folder
+
+request:
+  auth: inherit

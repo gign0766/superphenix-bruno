@@ -1,0 +1,456 @@
+info:
+  name: Update instance
+  type: http
+  seq: 57
+  tags:
+    - v1
+    - Superphenix Controller
+
+http:
+  method: POST
+  url: "{{baseUrl}}/:orgaId/api/spx-ctrl/:az/:projectId/instance/:effectiveId"
+  headers:
+    - name: Authorization
+      value: "{{apiKey}}"
+      description: Access token used to check user access in Superphenix API.
+  params:
+    - name: orgaId
+      value: ""
+      type: path
+      description: Organization ID
+    - name: az
+      value: ""
+      type: path
+      description: AZ Code
+    - name: projectId
+      value: ""
+      type: path
+      description: Project ID
+    - name: effectiveId
+      value: ""
+      type: path
+      description: Instance EID
+  body:
+    type: json
+    data: |-
+      {
+        "advanced": "",
+        "cloudInit": {
+          "bus": "",
+          "config": "",
+          "custom": false
+        },
+        "compute": {
+          "cpu": 0,
+          "memory": 0
+        },
+        "containerDisks": [],
+        "disks": [
+          {
+            "bus": "",
+            "cdrom": false,
+            "disk": {
+              "general": {
+                "labels": [],
+                "productName": "",
+                "source": {
+                  "clone": "",
+                  "snapshot": "",
+                  "type": "",
+                  "url": ""
+                },
+                "storage": "",
+                "storageClass": ""
+              }
+            },
+            "eid": "",
+            "order": 0
+          }
+        ],
+        "general": {
+          "labels": [],
+          "productName": "",
+          "runStrategy": "",
+          "vmType": ""
+        },
+        "network": [
+          {
+            "enabled": false,
+            "ipv4": "",
+            "ipv6": "",
+            "macAddress": "",
+            "model": "",
+            "order": 0,
+            "subnetEId": ""
+          }
+        ],
+        "sshKeys": []
+      }
+  auth:
+    type: apikey
+    key: Authorization
+    value: "{{apiKey}}"
+    placement: header
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: 200 Response
+    description: OK
+    request:
+      url: "{{baseUrl}}/:orgaId/api/spx-ctrl/:az/:projectId/instance/:effectiveId"
+      method: POST
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+      params:
+        - name: orgaId
+          value: ""
+          type: path
+          description: Organization ID
+        - name: az
+          value: ""
+          type: path
+          description: AZ Code
+        - name: projectId
+          value: ""
+          type: path
+          description: Project ID
+        - name: effectiveId
+          value: ""
+          type: path
+          description: Instance EID
+      body:
+        type: json
+        data: |-
+          {
+            "advanced": "",
+            "cloudInit": {
+              "bus": "",
+              "config": "",
+              "custom": false
+            },
+            "compute": {
+              "cpu": 0,
+              "memory": 0
+            },
+            "containerDisks": [],
+            "disks": [
+              {
+                "bus": "",
+                "cdrom": false,
+                "disk": {
+                  "general": {
+                    "labels": [],
+                    "productName": "",
+                    "source": {
+                      "clone": "",
+                      "snapshot": "",
+                      "type": "",
+                      "url": ""
+                    },
+                    "storage": "",
+                    "storageClass": ""
+                  }
+                },
+                "eid": "",
+                "order": 0
+              }
+            ],
+            "general": {
+              "labels": [],
+              "productName": "",
+              "runStrategy": "",
+              "vmType": ""
+            },
+            "network": [
+              {
+                "enabled": false,
+                "ipv4": "",
+                "ipv6": "",
+                "macAddress": "",
+                "model": "",
+                "order": 0,
+                "subnetEId": ""
+              }
+            ],
+            "sshKeys": []
+          }
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: ""
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/:orgaId/api/spx-ctrl/:az/:projectId/instance/:effectiveId"
+      method: POST
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+      params:
+        - name: orgaId
+          value: ""
+          type: path
+          description: Organization ID
+        - name: az
+          value: ""
+          type: path
+          description: AZ Code
+        - name: projectId
+          value: ""
+          type: path
+          description: Project ID
+        - name: effectiveId
+          value: ""
+          type: path
+          description: Instance EID
+      body:
+        type: json
+        data: |-
+          {
+            "advanced": "",
+            "cloudInit": {
+              "bus": "",
+              "config": "",
+              "custom": false
+            },
+            "compute": {
+              "cpu": 0,
+              "memory": 0
+            },
+            "containerDisks": [],
+            "disks": [
+              {
+                "bus": "",
+                "cdrom": false,
+                "disk": {
+                  "general": {
+                    "labels": [],
+                    "productName": "",
+                    "source": {
+                      "clone": "",
+                      "snapshot": "",
+                      "type": "",
+                      "url": ""
+                    },
+                    "storage": "",
+                    "storageClass": ""
+                  }
+                },
+                "eid": "",
+                "order": 0
+              }
+            ],
+            "general": {
+              "labels": [],
+              "productName": "",
+              "runStrategy": "",
+              "vmType": ""
+            },
+            "network": [
+              {
+                "enabled": false,
+                "ipv4": "",
+                "ipv6": "",
+                "macAddress": "",
+                "model": "",
+                "order": 0,
+                "subnetEId": ""
+              }
+            ],
+            "sshKeys": []
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      body:
+        type: text
+        data: ""
+  - name: 404 Response
+    description: Not Found
+    request:
+      url: "{{baseUrl}}/:orgaId/api/spx-ctrl/:az/:projectId/instance/:effectiveId"
+      method: POST
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+      params:
+        - name: orgaId
+          value: ""
+          type: path
+          description: Organization ID
+        - name: az
+          value: ""
+          type: path
+          description: AZ Code
+        - name: projectId
+          value: ""
+          type: path
+          description: Project ID
+        - name: effectiveId
+          value: ""
+          type: path
+          description: Instance EID
+      body:
+        type: json
+        data: |-
+          {
+            "advanced": "",
+            "cloudInit": {
+              "bus": "",
+              "config": "",
+              "custom": false
+            },
+            "compute": {
+              "cpu": 0,
+              "memory": 0
+            },
+            "containerDisks": [],
+            "disks": [
+              {
+                "bus": "",
+                "cdrom": false,
+                "disk": {
+                  "general": {
+                    "labels": [],
+                    "productName": "",
+                    "source": {
+                      "clone": "",
+                      "snapshot": "",
+                      "type": "",
+                      "url": ""
+                    },
+                    "storage": "",
+                    "storageClass": ""
+                  }
+                },
+                "eid": "",
+                "order": 0
+              }
+            ],
+            "general": {
+              "labels": [],
+              "productName": "",
+              "runStrategy": "",
+              "vmType": ""
+            },
+            "network": [
+              {
+                "enabled": false,
+                "ipv4": "",
+                "ipv6": "",
+                "macAddress": "",
+                "model": "",
+                "order": 0,
+                "subnetEId": ""
+              }
+            ],
+            "sshKeys": []
+          }
+    response:
+      status: 404
+      statusText: Not Found
+      body:
+        type: text
+        data: ""
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{baseUrl}}/:orgaId/api/spx-ctrl/:az/:projectId/instance/:effectiveId"
+      method: POST
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+      params:
+        - name: orgaId
+          value: ""
+          type: path
+          description: Organization ID
+        - name: az
+          value: ""
+          type: path
+          description: AZ Code
+        - name: projectId
+          value: ""
+          type: path
+          description: Project ID
+        - name: effectiveId
+          value: ""
+          type: path
+          description: Instance EID
+      body:
+        type: json
+        data: |-
+          {
+            "advanced": "",
+            "cloudInit": {
+              "bus": "",
+              "config": "",
+              "custom": false
+            },
+            "compute": {
+              "cpu": 0,
+              "memory": 0
+            },
+            "containerDisks": [],
+            "disks": [
+              {
+                "bus": "",
+                "cdrom": false,
+                "disk": {
+                  "general": {
+                    "labels": [],
+                    "productName": "",
+                    "source": {
+                      "clone": "",
+                      "snapshot": "",
+                      "type": "",
+                      "url": ""
+                    },
+                    "storage": "",
+                    "storageClass": ""
+                  }
+                },
+                "eid": "",
+                "order": 0
+              }
+            ],
+            "general": {
+              "labels": [],
+              "productName": "",
+              "runStrategy": "",
+              "vmType": ""
+            },
+            "network": [
+              {
+                "enabled": false,
+                "ipv4": "",
+                "ipv6": "",
+                "macAddress": "",
+                "model": "",
+                "order": 0,
+                "subnetEId": ""
+              }
+            ],
+            "sshKeys": []
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      body:
+        type: text
+        data: ""
+
+docs: Update an instance

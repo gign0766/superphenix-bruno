@@ -1,0 +1,160 @@
+info:
+  name: Retrieve a project resource overview
+  type: http
+  seq: 125
+  tags:
+    - v1
+    - Superphenix Controller
+
+http:
+  method: GET
+  url: "{{baseUrl}}/:orgaId/api/spx-ctrl/:projectId/summary"
+  headers:
+    - name: Authorization
+      value: "{{apiKey}}"
+      description: Access token used to check user access in Superphenix API.
+  params:
+    - name: orgaId
+      value: ""
+      type: path
+      description: Organization ID
+    - name: projectId
+      value: ""
+      type: path
+      description: Project ID
+  auth:
+    type: apikey
+    key: Authorization
+    value: "{{apiKey}}"
+    placement: header
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: 200 Response
+    description: Resource counts per product type
+    request:
+      url: "{{baseUrl}}/:orgaId/api/spx-ctrl/:projectId/summary"
+      method: GET
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+      params:
+        - name: orgaId
+          value: ""
+          type: path
+          description: Organization ID
+        - name: projectId
+          value: ""
+          type: path
+          description: Project ID
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "counts": {},
+            "countsByAz": {},
+            "quota": {
+              "limit": 0,
+              "used": 0
+            },
+            "recent": [
+              {
+                "codeAz": "",
+                "createdAt": "",
+                "eid": "",
+                "id": "",
+                "productName": "",
+                "productType": ""
+              }
+            ]
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/:orgaId/api/spx-ctrl/:projectId/summary"
+      method: GET
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+      params:
+        - name: orgaId
+          value: ""
+          type: path
+          description: Organization ID
+        - name: projectId
+          value: ""
+          type: path
+          description: Project ID
+    response:
+      status: 400
+      statusText: Bad Request
+      body:
+        type: text
+        data: ""
+  - name: 404 Response
+    description: Not Found
+    request:
+      url: "{{baseUrl}}/:orgaId/api/spx-ctrl/:projectId/summary"
+      method: GET
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+      params:
+        - name: orgaId
+          value: ""
+          type: path
+          description: Organization ID
+        - name: projectId
+          value: ""
+          type: path
+          description: Project ID
+    response:
+      status: 404
+      statusText: Not Found
+      body:
+        type: text
+        data: ""
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{baseUrl}}/:orgaId/api/spx-ctrl/:projectId/summary"
+      method: GET
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+      params:
+        - name: orgaId
+          value: ""
+          type: path
+          description: Organization ID
+        - name: projectId
+          value: ""
+          type: path
+          description: Project ID
+    response:
+      status: 500
+      statusText: Internal Server Error
+      body:
+        type: text
+        data: ""
+
+docs: |-
+  Report the project resources of each product type the caller is allowed to read:
+  counts, spread over the AZs, product creation quota usage and last created ones.
+  GitOps-managed resources are not reported.

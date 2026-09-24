@@ -1,0 +1,146 @@
+info:
+  name: Transfer organization ownership
+  type: http
+  seq: 20
+  tags:
+    - v1
+    - organization
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v1/organization/:orgaId/transfer"
+  headers:
+    - name: Authorization
+      value: "{{apiKey}}"
+      description: Access token used to check user access in Superphenix API.
+  params:
+    - name: orgaId
+      value: ""
+      type: path
+      description: Organization ID
+  body:
+    type: json
+    data: |-
+      {
+        "newOwnerInviteCode": ""
+      }
+  auth:
+    type: apikey
+    key: Authorization
+    value: "{{apiKey}}"
+    placement: header
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: 200 Response
+    description: OK
+    request:
+      url: "{{baseUrl}}/v1/organization/:orgaId/transfer"
+      method: POST
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+      params:
+        - name: orgaId
+          value: ""
+          type: path
+          description: Organization ID
+      body:
+        type: json
+        data: |-
+          {
+            "newOwnerInviteCode": ""
+          }
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: ""
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v1/organization/:orgaId/transfer"
+      method: POST
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+      params:
+        - name: orgaId
+          value: ""
+          type: path
+          description: Organization ID
+      body:
+        type: json
+        data: |-
+          {
+            "newOwnerInviteCode": ""
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      body:
+        type: text
+        data: ""
+  - name: 403 Response
+    description: Forbidden
+    request:
+      url: "{{baseUrl}}/v1/organization/:orgaId/transfer"
+      method: POST
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+      params:
+        - name: orgaId
+          value: ""
+          type: path
+          description: Organization ID
+      body:
+        type: json
+        data: |-
+          {
+            "newOwnerInviteCode": ""
+          }
+    response:
+      status: 403
+      statusText: Forbidden
+      body:
+        type: text
+        data: ""
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{baseUrl}}/v1/organization/:orgaId/transfer"
+      method: POST
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+      params:
+        - name: orgaId
+          value: ""
+          type: path
+          description: Organization ID
+      body:
+        type: json
+        data: |-
+          {
+            "newOwnerInviteCode": ""
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      body:
+        type: text
+        data: ""
+
+docs: Transfer organization ownership to another user

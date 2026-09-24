@@ -1,0 +1,129 @@
+info:
+  name: Update permission schema
+  type: http
+  seq: 1
+  tags:
+    - Admin endpoint
+
+http:
+  method: POST
+  url: "{{baseUrl}}/admin/permission/update-schema"
+  body:
+    type: json
+    data: |-
+      {
+        "deletedRelations": [],
+        "force": false,
+        "renamedRelations": [
+          {
+            "new": "",
+            "old": ""
+          }
+        ]
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: 200 Response
+    description: Response
+    request:
+      url: "{{baseUrl}}/admin/permission/update-schema"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "deletedRelations": [],
+            "force": false,
+            "renamedRelations": [
+              {
+                "new": "",
+                "old": ""
+              }
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "groupFailedIds": {},
+            "groupMissingIds": {},
+            "organizationFailedIds": [],
+            "organization_updated": 0,
+            "reconcile": {
+              "groupsCreated": 0,
+              "groupsUpdated": 0,
+              "organizationFailedIds": [],
+              "organizationsScanned": 0,
+              "organizationsUpdated": 0
+            }
+          }
+  - name: 400 Response
+    description: Error
+    request:
+      url: "{{baseUrl}}/admin/permission/update-schema"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "deletedRelations": [],
+            "force": false,
+            "renamedRelations": [
+              {
+                "new": "",
+                "old": ""
+              }
+            ]
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: ""
+  - name: 500 Response
+    description: Error
+    request:
+      url: "{{baseUrl}}/admin/permission/update-schema"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "deletedRelations": [],
+            "force": false,
+            "renamedRelations": [
+              {
+                "new": "",
+                "old": ""
+              }
+            ]
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: ""
+
+docs: Update permission schema in database and Permify

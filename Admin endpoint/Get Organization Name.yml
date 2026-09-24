@@ -1,0 +1,89 @@
+info:
+  name: Get Organization Name
+  type: http
+  seq: 2
+  tags:
+    - Admin endpoint
+    - Billing
+    - v1
+
+http:
+  method: GET
+  url: "{{baseUrl}}/billing/organization/:orgaId"
+  headers:
+    - name: Secret
+      value: test
+  params:
+    - name: orgaId
+      value: ""
+      type: path
+      description: Organization ID
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: 200 Response
+    description: Organization Name
+    request:
+      url: "{{baseUrl}}/billing/organization/:orgaId"
+      method: GET
+      params:
+        - name: orgaId
+          value: ""
+          type: path
+          description: Organization ID
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: ""
+  - name: 400 Response
+    description: Error
+    request:
+      url: "{{baseUrl}}/billing/organization/:orgaId"
+      method: GET
+      params:
+        - name: orgaId
+          value: ""
+          type: path
+          description: Organization ID
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: ""
+  - name: 500 Response
+    description: Error
+    request:
+      url: "{{baseUrl}}/billing/organization/:orgaId"
+      method: GET
+      params:
+        - name: orgaId
+          value: ""
+          type: path
+          description: Organization ID
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: ""
+
+docs: Get Organization Name by SPX Organization ID

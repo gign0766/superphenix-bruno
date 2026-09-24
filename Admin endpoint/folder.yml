@@ -1,0 +1,6 @@
+info:
+  name: Admin endpoint
+  type: folder
+
+request:
+  auth: inherit

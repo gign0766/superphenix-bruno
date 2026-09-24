@@ -1,0 +1,133 @@
+info:
+  name: Get an Organization
+  type: http
+  seq: 4
+  tags:
+    - v1
+    - organization
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v1/organization/:orgaId"
+  headers:
+    - name: Authorization
+      value: "{{apiKey}}"
+      description: Access token used to check user access in Superphenix API.
+  params:
+    - name: orgaId
+      value: ""
+      type: path
+      description: Organization ID
+  auth:
+    type: apikey
+    key: Authorization
+    value: "{{apiKey}}"
+    placement: header
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: 200 Response
+    description: Organization
+    request:
+      url: "{{baseUrl}}/v1/organization/:orgaId"
+      method: GET
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+      params:
+        - name: orgaId
+          value: ""
+          type: path
+          description: Organization ID
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "administrativeContact": "",
+            "billingContact": "",
+            "id": "",
+            "name": "",
+            "owner": {
+              "email": "",
+              "firstname": "",
+              "id": "",
+              "inviteCode": "",
+              "lastname": ""
+            },
+            "ownerId": "",
+            "projects": [
+              {
+                "id": "",
+                "name": "",
+                "orgaId": ""
+              }
+            ],
+            "technicalContact": "",
+            "users": [
+              {
+                "groups": [],
+                "user": {
+                  "email": "",
+                  "firstname": "",
+                  "id": "",
+                  "inviteCode": "",
+                  "lastname": ""
+                }
+              }
+            ]
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v1/organization/:orgaId"
+      method: GET
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+      params:
+        - name: orgaId
+          value: ""
+          type: path
+          description: Organization ID
+    response:
+      status: 400
+      statusText: Bad Request
+      body:
+        type: text
+        data: ""
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{baseUrl}}/v1/organization/:orgaId"
+      method: GET
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+      params:
+        - name: orgaId
+          value: ""
+          type: path
+          description: Organization ID
+    response:
+      status: 500
+      statusText: Internal Server Error
+      body:
+        type: text
+        data: ""
+
+docs: Get an Organization by id

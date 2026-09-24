@@ -1,0 +1,6 @@
+info:
+  name: api-token
+  type: folder
+
+request:
+  auth: inherit

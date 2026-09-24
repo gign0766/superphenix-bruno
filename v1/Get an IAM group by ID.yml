@@ -1,0 +1,99 @@
+info:
+  name: Get an IAM group by ID
+  type: http
+  seq: 12
+  tags:
+    - v1
+    - iam
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v1/organization/:orgaId/iam/group/:groupId"
+  headers:
+    - name: Authorization
+      value: "{{apiKey}}"
+      description: Access token used to check user access in Superphenix API.
+  params:
+    - name: orgaId
+      value: ""
+      type: path
+      description: Organization ID
+    - name: groupId
+      value: ""
+      type: path
+      description: Group ID
+  auth:
+    type: apikey
+    key: Authorization
+    value: "{{apiKey}}"
+    placement: header
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: 200 Response
+    description: Group
+    request:
+      url: "{{baseUrl}}/v1/organization/:orgaId/iam/group/:groupId"
+      method: GET
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+      params:
+        - name: orgaId
+          value: ""
+          type: path
+          description: Organization ID
+        - name: groupId
+          value: ""
+          type: path
+          description: Group ID
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "allProjects": false,
+            "id": "",
+            "name": "",
+            "permissionSets": [],
+            "predefinedKey": "",
+            "projectIds": []
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{baseUrl}}/v1/organization/:orgaId/iam/group/:groupId"
+      method: GET
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+      params:
+        - name: orgaId
+          value: ""
+          type: path
+          description: Organization ID
+        - name: groupId
+          value: ""
+          type: path
+          description: Group ID
+    response:
+      status: 500
+      statusText: Internal Server Error
+      body:
+        type: text
+        data: ""
+
+docs: Get an IAM group by ID

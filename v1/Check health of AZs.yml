@@ -1,0 +1,51 @@
+info:
+  name: Check health of AZs
+  type: http
+  seq: 8
+  tags:
+    - v1
+    - az
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v1/organization/:orgaId/az-status"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: 200 Response
+    description: Map of AZ code to status (up/down)
+    request:
+      url: "{{baseUrl}}/v1/organization/:orgaId/az-status"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: "{}"
+  - name: 500 Response
+    description: Error
+    request:
+      url: "{{baseUrl}}/v1/organization/:orgaId/az-status"
+      method: GET
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: ""
+
+docs: Fetch all available for the user and contact each AZ's /health endpoint to determine availability

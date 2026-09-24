@@ -1,0 +1,140 @@
+info:
+  name: Create an API Token
+  type: http
+  seq: 2
+  tags:
+    - api-token
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api-token"
+  headers:
+    - name: Authorization
+      value: "{{apiKey}}"
+      description: Access token used to check user access in Superphenix API.
+  body:
+    type: json
+    data: |-
+      {
+        "expiresAt": "",
+        "name": ""
+      }
+  auth:
+    type: apikey
+    key: Authorization
+    value: "{{apiKey}}"
+    placement: header
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: 201 Response
+    description: Created token (plain-text, shown only once)
+    request:
+      url: "{{baseUrl}}/api-token"
+      method: POST
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+      body:
+        type: json
+        data: |-
+          {
+            "expiresAt": "",
+            "name": ""
+          }
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "token": ""
+          }
+  - name: 400 Response
+    description: Invalid request (bad format or expired date)
+    request:
+      url: "{{baseUrl}}/api-token"
+      method: POST
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+      body:
+        type: json
+        data: |-
+          {
+            "expiresAt": "",
+            "name": ""
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: ""
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/api-token"
+      method: POST
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+      body:
+        type: json
+        data: |-
+          {
+            "expiresAt": "",
+            "name": ""
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: ""
+  - name: 500 Response
+    description: Internal server error
+    request:
+      url: "{{baseUrl}}/api-token"
+      method: POST
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+      body:
+        type: json
+        data: |-
+          {
+            "expiresAt": "",
+            "name": ""
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: ""
+
+docs: Create a new API token for the authenticated user. The plain-text token is returned only once in the response.

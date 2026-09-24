@@ -1,0 +1,147 @@
+info:
+  name: Revoke an API Token
+  type: http
+  seq: 3
+  tags:
+    - api-token
+
+http:
+  method: DELETE
+  url: "{{baseUrl}}/api-token/:tokenId"
+  headers:
+    - name: Authorization
+      value: "{{apiKey}}"
+      description: Access token used to check user access in Superphenix API.
+  params:
+    - name: tokenId
+      value: ""
+      type: path
+      description: Token ID (UUID)
+  auth:
+    type: apikey
+    key: Authorization
+    value: "{{apiKey}}"
+    placement: header
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: 204 Response
+    description: Token revoked successfully
+    request:
+      url: "{{baseUrl}}/api-token/:tokenId"
+      method: DELETE
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+      params:
+        - name: tokenId
+          value: ""
+          type: path
+          description: Token ID (UUID)
+    response:
+      status: 204
+      statusText: No Content
+      body:
+        type: text
+        data: ""
+  - name: 400 Response
+    description: Invalid tokenId format
+    request:
+      url: "{{baseUrl}}/api-token/:tokenId"
+      method: DELETE
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+      params:
+        - name: tokenId
+          value: ""
+          type: path
+          description: Token ID (UUID)
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: ""
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/api-token/:tokenId"
+      method: DELETE
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+      params:
+        - name: tokenId
+          value: ""
+          type: path
+          description: Token ID (UUID)
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: ""
+  - name: 404 Response
+    description: Token not found
+    request:
+      url: "{{baseUrl}}/api-token/:tokenId"
+      method: DELETE
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+      params:
+        - name: tokenId
+          value: ""
+          type: path
+          description: Token ID (UUID)
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: ""
+  - name: 500 Response
+    description: Internal server error
+    request:
+      url: "{{baseUrl}}/api-token/:tokenId"
+      method: DELETE
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+      params:
+        - name: tokenId
+          value: ""
+          type: path
+          description: Token ID (UUID)
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: ""
+
+docs: Revoke (delete) an existing API token. The token must belong to the authenticated user.

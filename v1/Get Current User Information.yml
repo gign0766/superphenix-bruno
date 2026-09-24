@@ -1,0 +1,87 @@
+info:
+  name: Get Current User Information
+  type: http
+  seq: 23
+  tags:
+    - v1
+    - session
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v1/whoami"
+  headers:
+    - name: Authorization
+      value: "{{apiKey}}"
+      description: Access token used to check user access in Superphenix API.
+  auth:
+    type: apikey
+    key: Authorization
+    value: "{{apiKey}}"
+    placement: header
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: 200 Response
+    description: User
+    request:
+      url: "{{baseUrl}}/v1/whoami"
+      method: GET
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "email": "",
+            "firstname": "",
+            "guestOrg": [
+              {
+                "id": "",
+                "name": "",
+                "ownerId": ""
+              }
+            ],
+            "id": "",
+            "inviteCode": "",
+            "lastname": "",
+            "personalOrg": [
+              {
+                "id": "",
+                "name": "",
+                "ownerId": ""
+              }
+            ],
+            "provider": "",
+            "providerId": ""
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{baseUrl}}/v1/whoami"
+      method: GET
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+    response:
+      status: 500
+      statusText: Internal Server Error
+      body:
+        type: text
+        data: ""
+
+docs: Get current user information based on access token

@@ -1,0 +1,262 @@
+info:
+  name: Create loadBalancer
+  type: http
+  seq: 78
+  tags:
+    - v1
+    - Superphenix Controller
+
+http:
+  method: POST
+  url: "{{baseUrl}}/:orgaId/api/spx-ctrl/:az/:projectId/load-balancer"
+  headers:
+    - name: Authorization
+      value: "{{apiKey}}"
+      description: Access token used to check user access in Superphenix API.
+  params:
+    - name: orgaId
+      value: ""
+      type: path
+      description: Organization ID
+    - name: az
+      value: ""
+      type: path
+      description: AZ Code
+    - name: projectId
+      value: ""
+      type: path
+      description: Project ID
+  body:
+    type: json
+    data: |-
+      {
+        "general": {
+          "productName": ""
+        },
+        "spec": {
+          "endpoints": [],
+          "ports": [
+            {
+              "port": 0,
+              "protocol": "",
+              "targetPort": 0
+            }
+          ],
+          "selectors": [],
+          "vip": ""
+        }
+      }
+  auth:
+    type: apikey
+    key: Authorization
+    value: "{{apiKey}}"
+    placement: header
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: 200 Response
+    description: OK
+    request:
+      url: "{{baseUrl}}/:orgaId/api/spx-ctrl/:az/:projectId/load-balancer"
+      method: POST
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+      params:
+        - name: orgaId
+          value: ""
+          type: path
+          description: Organization ID
+        - name: az
+          value: ""
+          type: path
+          description: AZ Code
+        - name: projectId
+          value: ""
+          type: path
+          description: Project ID
+      body:
+        type: json
+        data: |-
+          {
+            "general": {
+              "productName": ""
+            },
+            "spec": {
+              "endpoints": [],
+              "ports": [
+                {
+                  "port": 0,
+                  "protocol": "",
+                  "targetPort": 0
+                }
+              ],
+              "selectors": [],
+              "vip": ""
+            }
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "eid": ""
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/:orgaId/api/spx-ctrl/:az/:projectId/load-balancer"
+      method: POST
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+      params:
+        - name: orgaId
+          value: ""
+          type: path
+          description: Organization ID
+        - name: az
+          value: ""
+          type: path
+          description: AZ Code
+        - name: projectId
+          value: ""
+          type: path
+          description: Project ID
+      body:
+        type: json
+        data: |-
+          {
+            "general": {
+              "productName": ""
+            },
+            "spec": {
+              "endpoints": [],
+              "ports": [
+                {
+                  "port": 0,
+                  "protocol": "",
+                  "targetPort": 0
+                }
+              ],
+              "selectors": [],
+              "vip": ""
+            }
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      body:
+        type: text
+        data: ""
+  - name: 404 Response
+    description: Not Found
+    request:
+      url: "{{baseUrl}}/:orgaId/api/spx-ctrl/:az/:projectId/load-balancer"
+      method: POST
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+      params:
+        - name: orgaId
+          value: ""
+          type: path
+          description: Organization ID
+        - name: az
+          value: ""
+          type: path
+          description: AZ Code
+        - name: projectId
+          value: ""
+          type: path
+          description: Project ID
+      body:
+        type: json
+        data: |-
+          {
+            "general": {
+              "productName": ""
+            },
+            "spec": {
+              "endpoints": [],
+              "ports": [
+                {
+                  "port": 0,
+                  "protocol": "",
+                  "targetPort": 0
+                }
+              ],
+              "selectors": [],
+              "vip": ""
+            }
+          }
+    response:
+      status: 404
+      statusText: Not Found
+      body:
+        type: text
+        data: ""
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{baseUrl}}/:orgaId/api/spx-ctrl/:az/:projectId/load-balancer"
+      method: POST
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+      params:
+        - name: orgaId
+          value: ""
+          type: path
+          description: Organization ID
+        - name: az
+          value: ""
+          type: path
+          description: AZ Code
+        - name: projectId
+          value: ""
+          type: path
+          description: Project ID
+      body:
+        type: json
+        data: |-
+          {
+            "general": {
+              "productName": ""
+            },
+            "spec": {
+              "endpoints": [],
+              "ports": [
+                {
+                  "port": 0,
+                  "protocol": "",
+                  "targetPort": 0
+                }
+              ],
+              "selectors": [],
+              "vip": ""
+            }
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      body:
+        type: text
+        data: ""
+
+docs: Create a new loadBalancer

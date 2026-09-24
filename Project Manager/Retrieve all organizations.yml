@@ -1,0 +1,116 @@
+info:
+  name: Retrieve all organizations
+  type: http
+  seq: 1
+  tags:
+    - Project Manager
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v1/project-manager/organizations"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: 200 Response
+    description: Organizations
+    request:
+      url: "{{baseUrl}}/v1/project-manager/organizations"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          [
+            {
+              "administrativeContact": "",
+              "billingContact": "",
+              "createdAt": "",
+              "deletedAt": {
+                "time": "",
+                "valid": false
+              },
+              "id": "",
+              "name": "",
+              "ownerId": "",
+              "predefinedCatalogVersion": 0,
+              "projects": [
+                {
+                  "createdAt": "",
+                  "deletedAt": {
+                    "time": "",
+                    "valid": false
+                  },
+                  "id": "",
+                  "name": "",
+                  "orgaId": "",
+                  "updatedAt": ""
+                }
+              ],
+              "technicalContact": "",
+              "updatedAt": "",
+              "userRoles": [
+                {
+                  "groupId": "",
+                  "organizationId": "",
+                  "userId": ""
+                }
+              ],
+              "users": [
+                {
+                  "createdAt": "",
+                  "deletedAt": {
+                    "time": "",
+                    "valid": false
+                  },
+                  "email": "",
+                  "firstname": "",
+                  "guestOrg": [],
+                  "id": "",
+                  "inviteCode": "",
+                  "inviteCodeRegeneratedAt": "",
+                  "isActive": false,
+                  "lastname": "",
+                  "personalOrg": [],
+                  "provider": "",
+                  "providerId": "",
+                  "updatedAt": ""
+                }
+              ]
+            }
+          ]
+  - name: 404 Response
+    description: Not Found
+    request:
+      url: "{{baseUrl}}/v1/project-manager/organizations"
+      method: GET
+    response:
+      status: 404
+      statusText: Not Found
+      body:
+        type: text
+        data: ""
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{baseUrl}}/v1/project-manager/organizations"
+      method: GET
+    response:
+      status: 500
+      statusText: Internal Server Error
+      body:
+        type: text
+        data: ""
+
+docs: Retrieve all organizations with their associations. Requires super-admin privileges.

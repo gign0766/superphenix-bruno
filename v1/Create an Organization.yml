@@ -1,0 +1,135 @@
+info:
+  name: Create an Organization
+  type: http
+  seq: 3
+  tags:
+    - v1
+    - organization
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v1/organization"
+  headers:
+    - name: Authorization
+      value: "{{apiKey}}"
+      description: Access token used to check user access in Superphenix API.
+  auth:
+    type: apikey
+    key: Authorization
+    value: "{{apiKey}}"
+    placement: header
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: 200 Response
+    description: Created Organization
+    request:
+      url: "{{baseUrl}}/v1/organization"
+      method: POST
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "administrativeContact": "",
+            "billingContact": "",
+            "createdAt": "",
+            "deletedAt": {
+              "time": "",
+              "valid": false
+            },
+            "id": "",
+            "name": "",
+            "ownerId": "",
+            "predefinedCatalogVersion": 0,
+            "projects": [
+              {
+                "createdAt": "",
+                "deletedAt": {
+                  "time": "",
+                  "valid": false
+                },
+                "id": "",
+                "name": "",
+                "orgaId": "",
+                "updatedAt": ""
+              }
+            ],
+            "technicalContact": "",
+            "updatedAt": "",
+            "userRoles": [
+              {
+                "groupId": "",
+                "organizationId": "",
+                "userId": ""
+              }
+            ],
+            "users": [
+              {
+                "createdAt": "",
+                "deletedAt": {
+                  "time": "",
+                  "valid": false
+                },
+                "email": "",
+                "firstname": "",
+                "guestOrg": [],
+                "id": "",
+                "inviteCode": "",
+                "inviteCodeRegeneratedAt": "",
+                "isActive": false,
+                "lastname": "",
+                "personalOrg": [],
+                "provider": "",
+                "providerId": "",
+                "updatedAt": ""
+              }
+            ]
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v1/organization"
+      method: POST
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+    response:
+      status: 400
+      statusText: Bad Request
+      body:
+        type: text
+        data: ""
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{baseUrl}}/v1/organization"
+      method: POST
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+    response:
+      status: 500
+      statusText: Internal Server Error
+      body:
+        type: text
+        data: ""
+
+docs: Initialize a new organization, a default project and the associated permissions

@@ -1,0 +1,103 @@
+info:
+  name: Retrieve S3 configuration
+  type: http
+  seq: 82
+  tags:
+    - v1
+    - Superphenix Controller
+
+http:
+  method: GET
+  url: "{{baseUrl}}/:orgaId/api/spx-ctrl/:az/:projectId/s3-config"
+  headers:
+    - name: Authorization
+      value: "{{apiKey}}"
+      description: Access token used to check user access in Superphenix API.
+  params:
+    - name: orgaId
+      value: ""
+      type: path
+      description: Organization ID
+    - name: az
+      value: ""
+      type: path
+      description: AZ Code
+    - name: projectId
+      value: ""
+      type: path
+      description: Project ID
+  auth:
+    type: apikey
+    key: Authorization
+    value: "{{apiKey}}"
+    placement: header
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: 200 Response
+    description: S3 Config
+    request:
+      url: "{{baseUrl}}/:orgaId/api/spx-ctrl/:az/:projectId/s3-config"
+      method: GET
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+      params:
+        - name: orgaId
+          value: ""
+          type: path
+          description: Organization ID
+        - name: az
+          value: ""
+          type: path
+          description: AZ Code
+        - name: projectId
+          value: ""
+          type: path
+          description: Project ID
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: "{}"
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{baseUrl}}/:orgaId/api/spx-ctrl/:az/:projectId/s3-config"
+      method: GET
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+      params:
+        - name: orgaId
+          value: ""
+          type: path
+          description: Organization ID
+        - name: az
+          value: ""
+          type: path
+          description: AZ Code
+        - name: projectId
+          value: ""
+          type: path
+          description: Project ID
+    response:
+      status: 500
+      statusText: Internal Server Error
+      body:
+        type: text
+        data: ""
+
+docs: Retrieve the S3 storage classes and bucket limits for a specific AZ

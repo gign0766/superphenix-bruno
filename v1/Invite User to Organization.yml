@@ -1,0 +1,191 @@
+info:
+  name: Invite User to Organization
+  type: http
+  seq: 14
+  tags:
+    - v1
+    - iam
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v1/organization/:orgaId/iam/invite"
+  headers:
+    - name: Authorization
+      value: "{{apiKey}}"
+      description: Access token used to check user access in Superphenix API.
+  params:
+    - name: orgaId
+      value: ""
+      type: path
+      description: Organization ID
+  body:
+    type: json
+    data: |-
+      {
+        "groupIds": [],
+        "userInviteCode": ""
+      }
+  auth:
+    type: apikey
+    key: Authorization
+    value: "{{apiKey}}"
+    placement: header
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: 200 Response
+    description: User Group Relation
+    request:
+      url: "{{baseUrl}}/v1/organization/:orgaId/iam/invite"
+      method: POST
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+      params:
+        - name: orgaId
+          value: ""
+          type: path
+          description: Organization ID
+      body:
+        type: json
+        data: |-
+          {
+            "groupIds": [],
+            "userInviteCode": ""
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "groups": [],
+            "user": {
+              "email": "",
+              "firstname": "",
+              "id": "",
+              "inviteCode": "",
+              "lastname": ""
+            }
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v1/organization/:orgaId/iam/invite"
+      method: POST
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+      params:
+        - name: orgaId
+          value: ""
+          type: path
+          description: Organization ID
+      body:
+        type: json
+        data: |-
+          {
+            "groupIds": [],
+            "userInviteCode": ""
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      body:
+        type: text
+        data: ""
+  - name: 403 Response
+    description: Forbidden
+    request:
+      url: "{{baseUrl}}/v1/organization/:orgaId/iam/invite"
+      method: POST
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+      params:
+        - name: orgaId
+          value: ""
+          type: path
+          description: Organization ID
+      body:
+        type: json
+        data: |-
+          {
+            "groupIds": [],
+            "userInviteCode": ""
+          }
+    response:
+      status: 403
+      statusText: Forbidden
+      body:
+        type: text
+        data: ""
+  - name: 404 Response
+    description: Not Found
+    request:
+      url: "{{baseUrl}}/v1/organization/:orgaId/iam/invite"
+      method: POST
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+      params:
+        - name: orgaId
+          value: ""
+          type: path
+          description: Organization ID
+      body:
+        type: json
+        data: |-
+          {
+            "groupIds": [],
+            "userInviteCode": ""
+          }
+    response:
+      status: 404
+      statusText: Not Found
+      body:
+        type: text
+        data: ""
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{baseUrl}}/v1/organization/:orgaId/iam/invite"
+      method: POST
+      headers:
+        - name: Authorization
+          value: "{{apiKey}}"
+          description: Access token used to check user access in Superphenix API.
+      params:
+        - name: orgaId
+          value: ""
+          type: path
+          description: Organization ID
+      body:
+        type: json
+        data: |-
+          {
+            "groupIds": [],
+            "userInviteCode": ""
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      body:
+        type: text
+        data: ""
+
+docs: Invite a user into an organization with given roles (or update their roles)
